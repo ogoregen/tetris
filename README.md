@@ -1,3 +1,4 @@
 # tetris
-tetris made with processing
+tetris made with processing.
+
 work on progress.
