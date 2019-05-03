@@ -1,6 +1,6 @@
 
 system t;
-boolean paused;
+boolean paused, start;
 
 void settings(){
 
@@ -9,26 +9,41 @@ void settings(){
 
 void setup(){
 
-  textAlign(CENTER);
-  textSize(40);
-
+  textAlign(CENTER, CENTER);
   t = new system();
 }
 
 void draw(){
 
-  if(!paused){
+  translate(0, -60);
+  if(!start){
 
     background(0);
-    grid(t.res);
-
-    t.run();
+    textSize(20);
+    stroke(255);
+    fill(255);
+    line(0, height, width, height);
+    text("press any key to start", width/2, height/2);
+    if(keyPressed) start = true;
   }
   else{
 
-    stroke(255);
-    fill(255);
-    text("paused", width/2, height/2);
+    if(!paused){
+
+      background(0);
+
+
+      grid(t.res);
+
+      t.run();
+    }
+    else{
+
+      textSize(30);
+      stroke(255);
+      fill(255);
+      text("paused", width - 100, height);
+    }
   }
 }
 
@@ -36,7 +51,7 @@ void keyPressed(){
 
   if(keyCode == 'A') t.move(false);
   else if(keyCode == 'D') t.move(true);
-  else if(keyCode == 'P') paused = !paused;
+  else if(keyCode == 'P' && start) paused = !paused;
 }
 
 void grid(int res){

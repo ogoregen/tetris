@@ -52,10 +52,10 @@ class block{
 
   block(int x){
 
-    position = new PVector(x, 0);
+    position = new PVector(x, 80);
     v = new PVector();
     a = new PVector();
-    type = int(random(8));
+    type = int(random(7));
   }
 
   void update(){
@@ -79,7 +79,7 @@ class block{
     }
   }
 
-  void check(){
+  void check(){ //vertical
 
     boolean blocked = false;
     if(!hit){
@@ -87,12 +87,16 @@ class block{
       for(int i = 0; i < 4; i++){
 
         if(position.y >= height - t.res) blocked = true;
-        else if(position.y > 3 * t.res && t.grid[int(position.y/t.res) + shapes[type][i][0] + 1][int(position.x/t.res) + shapes[type][i][1]] == 1) blocked = true;
+        else if(t.grid[int(position.y/t.res) + shapes[type][i][0] + 1][int(position.x/t.res) + shapes[type][i][1]] == 1) blocked = true;
         if(blocked){
 
           for(int j = 0; j < 4; j++){
 
-            t.grid[int(position.y/t.res) + shapes[type][j][0]][int(position.x/t.res) + shapes[type][j][1]] = 1;
+            if(int(position.y/t.res) + shapes[type][j][0] >= 0){
+
+            t.grid[int(position.y/t.res) + shapes[type][j][0]]
+                  [int(position.x/t.res) + shapes[type][j][1]] = 1;
+                }
           }
           hit = true;
           break;
