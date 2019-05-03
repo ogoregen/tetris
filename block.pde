@@ -4,7 +4,6 @@ class block{
   PVector position, v, a;
   boolean hit;
   int type;
-
   int[][][] shapes = {
   { //square
     {0, 0},
@@ -47,7 +46,7 @@ class block{
     {0, -1},
     {-1, 0},
     {-1, 1}
-  }
+  },
   };
 
   block(int x){
@@ -88,15 +87,16 @@ class block{
 
         if(position.y >= height - t.res) blocked = true;
         else if(t.grid[int(position.y/t.res) + shapes[type][i][0] + 1][int(position.x/t.res) + shapes[type][i][1]] == 1) blocked = true;
+
         if(blocked){
 
           for(int j = 0; j < 4; j++){
 
             if(int(position.y/t.res) + shapes[type][j][0] >= 0){
 
-            t.grid[int(position.y/t.res) + shapes[type][j][0]]
-                  [int(position.x/t.res) + shapes[type][j][1]] = 1;
-                }
+              t.grid[int(position.y/t.res) + shapes[type][j][0]]
+                    [int(position.x/t.res) + shapes[type][j][1]] = 1;
+            }
           }
           hit = true;
           break;

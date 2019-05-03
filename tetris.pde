@@ -1,6 +1,7 @@
 
 system t;
 boolean paused, start;
+PVector down;
 
 void settings(){
 
@@ -9,49 +10,33 @@ void settings(){
 
 void setup(){
 
-  textAlign(CENTER, CENTER);
+  textSize(20);
   t = new system();
+  down = new PVector(0, 1);
 }
 
 void draw(){
 
-  translate(0, -60);
+  translate(0, -3 * t.res);
+  background(0);
   if(!start){
 
-    background(0);
-    textSize(20);
-    stroke(255);
-    fill(255);
-    line(0, height, width, height);
-    text("press any key to start", width/2, height/2);
     if(keyPressed) start = true;
   }
   else{
 
-    if(!paused){
-
-      background(0);
-
-
-      grid(t.res);
-
-      t.run();
-    }
-    else{
-
-      textSize(30);
-      stroke(255);
-      fill(255);
-      text("paused", width - 100, height);
-    }
+    grid(t.res);
+    t.run();
   }
+  hud();
 }
 
 void keyPressed(){
 
   if(keyCode == 'A') t.move(false);
   else if(keyCode == 'D') t.move(true);
-  else if(keyCode == 'P' && start) paused = !paused;
+  else if(keyCode == 'S' && t.b.position.y > t.res * 4) t.b.v.add(down);
+  else if(keyCode == 'P' && start && !t.over) paused = !paused;
 }
 
 void grid(int res){
@@ -63,7 +48,25 @@ void grid(int res){
 
       if(t.grid[y/t.res][x/t.res] == 1) fill(255);
       else fill(0);
+
       rect(x, y, res, res);
     }
   }
+}
+
+void hud(){
+
+  stroke(255);
+  fill(255);
+
+  textAlign(RIGHT);
+  if(paused) text("paused", width - 10, height + 50);
+  if(t.over) text("game over", width - 10, height + 50);
+  textAlign(LEFT);
+  if(start){
+
+    line(0, height, width, height);
+    text("score: " + t.score, 10, height + 50);
+  }
+  else text("press any key to start", 10, height/2 + 60);
 }
