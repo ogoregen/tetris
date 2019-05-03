@@ -7,6 +7,5 @@ tetris made with processing
 <li>restart</li>
 <li>next tetromino indicator</li>
 <li>wall kick</li>
-<li>idealizing tetromino origins</li>
 </ol>
 
