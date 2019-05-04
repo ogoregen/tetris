@@ -5,7 +5,6 @@ tetris made with processing
 
 <ol>
 <li>restart</li>
-<li>next tetromino indicator</li>
 <li>wall kick</li>
 </ol>
 
